@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
-import { Hobby, HobbyDocument } from 'src/model/hobby.model';
 import {
   CreateHobbyInput,
   ListHobbyInput,
   UpdateHobbyInput,
 } from './hobby.inputs';
+import { Hobby, HobbyDocument } from './hobby.model';
 
 @Injectable()
 export class HobbyService {

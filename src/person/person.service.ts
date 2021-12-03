@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
-import { Person, PersonDocument } from 'src/model/person.model';
+import { Person, PersonDocument } from 'src/person/person.model';
 import {
   CreatePersonInput,
   ListPersonInput,
