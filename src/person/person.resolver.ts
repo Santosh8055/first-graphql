@@ -1,5 +1,12 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Person } from './person.model';
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
+import { Person, PersonDocument } from './person.model';
 import { PersonService } from './person.service';
 import { Schema as MongooseSchema } from 'mongoose';
 import {
@@ -7,6 +14,7 @@ import {
   ListPersonInput,
   UpdatePersonInput,
 } from './person.inputs';
+import { Hobby } from 'src/hobby/hobby.model';
 
 @Resolver(() => Person)
 export class PersonResolver {
@@ -41,5 +49,15 @@ export class PersonResolver {
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
   ) {
     return this.personService.delete(_id);
+  }
+
+  @ResolveField()
+  async hobbies(
+    @Parent() person: PersonDocument,
+    @Args('populate') populate: boolean,
+  ) {
+    if (populate) await person.populate({ path: 'hobbies', model: Hobby.name });
+
+    return person.hobbies;
   }
 }
