@@ -7,7 +7,9 @@ import { PersonModule } from './person/person.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/first-graphql'),
+    MongooseModule.forRoot(
+      'mongodb+srv://sanmon:lubETLFcnPP3UGBc@sanconnect.uezlb.mongodb.net/first-graphql?retryWrites=true&w=majority',
+    ),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
