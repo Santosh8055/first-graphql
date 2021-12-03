@@ -1,7 +1,18 @@
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Hobby } from './hobby.model';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 
+@Schema()
 export class Person {
-  _id: string;
+  _id: MongooseSchema.Types.ObjectId;
+
+  @Prop()
   name: string;
+
+  @Prop()
   hobbies: Hobby[];
 }
+
+export type PersonDocument = Person & Document;
+
+export const PersonSchema = SchemaFactory.createForClass(Person);
